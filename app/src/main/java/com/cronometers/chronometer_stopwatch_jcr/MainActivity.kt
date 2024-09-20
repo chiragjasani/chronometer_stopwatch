@@ -21,14 +21,11 @@ class MainActivity : AppCompatActivity() {
         Log.w("msg","getFormattedTime : " + ChronometerManager.getFormattedTime(36000))
         Log.w("msg","getFormattedTime : " + ChronometerManager.timeStringToSeconds("00:01:00"))
 
-        val tripChronometer: Chronometer = findViewById(R.id.tripChronometer)
-        val waitingChronometer: Chronometer = findViewById(R.id.waitingChronometer)
-
         // Initialize ChronometerManager for each chronometer
-        tripChronometerManager = ChronometerManager(tripChronometer)
-        tripChronometerManager.setChronometerFormat()
-        waitingChronometerManager = ChronometerManager(waitingChronometer)
-        waitingChronometerManager.setChronometerFormat()
+        tripChronometerManager = ChronometerManager(findViewById(R.id.tripChronometer))
+        tripChronometerManager.setChronometerFormat(isTripTime=true)
+        waitingChronometerManager = ChronometerManager(findViewById(R.id.waitingChronometer))
+        waitingChronometerManager.setChronometerFormat(isTripTime=false)
 
         val startButton: Button = findViewById(R.id.startButton)
         val pauseButton: Button = findViewById(R.id.pauseButton)

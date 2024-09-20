@@ -1,8 +1,10 @@
 package com.cronometers.chronometer_stopwatch_jcr
 
 import android.os.SystemClock
+import android.util.Log
 import android.widget.Chronometer
 
+var TAG = "timer"
 class ChronometerManager(private val chronometer: Chronometer) {
 
     private var pauseOffset: Long = 0
@@ -49,10 +51,16 @@ class ChronometerManager(private val chronometer: Chronometer) {
     }
 
     // Optionally format the chronometer to HH:MM:SS
-    fun setChronometerFormat() {
+    fun setChronometerFormat(isTripTime: Boolean) {
+        chronometer.text = getFormattedTime(0)
         chronometer.setOnChronometerTickListener { chrono ->
             val elapsedMillis = SystemClock.elapsedRealtime() - chrono.base
             chrono.text = getFormattedTime(elapsedMillis)
+            if (isTripTime){
+                Log.w(TAG,"isTripTime time : $isTripTime seconds : ${elapsedMillis / 1000}")
+            }else{
+                Log.w(TAG,"isTripTime time : $isTripTime seconds : ${elapsedMillis / 1000}")
+            }
         }
     }
 
